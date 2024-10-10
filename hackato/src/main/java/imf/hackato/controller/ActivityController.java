@@ -6,7 +6,10 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Data;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.List;
 
 @Data
 @RestController
@@ -21,7 +24,7 @@ public class ActivityController {
 
     @Operation(summary = "Create activity", description = "Creates a new activity.")
     @PostMapping
-    public Mono<Activity> createActivity(@RequestBody Activity activity){
+    public Mono<Activity> createActivity(@RequestBody Activity activity) {
         return activityService.createActivity(activity);
     }
 
@@ -49,6 +52,16 @@ public class ActivityController {
         return activityService.deleteActivity(id);
     }
 
+    @Operation(summary = "Export activities", description = "Export activities in JSON format")
+    @GetMapping("/export")
+    public Flux<Activity> exportActivities() {
+        return activityService.getAllActivities();
+    }
+
+    @PostMapping("/import")
+    public Mono<Void> importActivities(@RequestBody List<Activity> activities) {
+        return activityService.importActivities(activities).then();
+    }
 
 
 }

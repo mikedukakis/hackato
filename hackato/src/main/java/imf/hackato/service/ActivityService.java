@@ -6,7 +6,10 @@ import imf.hackato.repository.ActivityRepository;
 import imf.hackato.repository.UserRepository;
 import lombok.Data;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.List;
 
 @Data
 @Service
@@ -26,9 +29,9 @@ public class ActivityService {
     public Mono<Activity> updateActivity(String id, Activity updatedActivity) {
         return activityRepository.findById(id)
                 .flatMap(activity -> {
-                    activity.setName(updatedActivity.getName());
-                    activity.setMaxCapacity(updatedActivity.getMaxCapacity());
-                    activity.setDescription(updatedActivity.getDescription());
+                    activity.setNom(updatedActivity.getNom());
+                    activity.setCapacitat_màxima(updatedActivity.getCapacitat_màxima());
+                    activity.setDescripció(updatedActivity.getDescripció());
                     return activityRepository.save(activity);
                 });
     }
@@ -45,7 +48,7 @@ public class ActivityService {
             Activity activity = tuple.getT1();
             User user = tuple.getT2();
 
-            if (activity.getParticipants().size() < activity.getMaxCapacity()) {
+            if (activity.getParticipants().size() < activity.getCapacitat_màxima()) {
                 activity.getParticipants().add(user);
                 return activityRepository.save(activity);
             } else {
@@ -57,4 +60,13 @@ public class ActivityService {
     public Mono<Void> deleteActivity(String id) {
         return activityRepository.deleteById(id);
     }
+
+    public Flux<Activity> getAllActivities() {
+        return activityRepository.findAll();
+    }
+
+    public Mono<Void> importActivities(List<Activity> activities) {
+        return activityRepository.saveAll(activities).then();
+    }
+
 }
