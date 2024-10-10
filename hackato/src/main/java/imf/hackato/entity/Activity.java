@@ -14,15 +14,15 @@ import java.util.List;
 public class Activity {
     @Id
     private String id;
-    private String name;
+    private String nom;
     private List<User> participants;
-    private short maxCapacity;
-    private String description;
+    private short capacitat_màxima;
+    private String descripció;
 
-    public Activity(String name, short maxCapacity, String description) {
-        this.name = name;
+    public Activity(String nom, short capacitat_màxima, String descripció) {
+        this.nom = nom;
         this.participants = new ArrayList<>();
-        this.maxCapacity = maxCapacity;
-        this.description = description;
+        this.capacitat_màxima = capacitat_màxima;
+        this.descripció = descripció;
     }
 }
