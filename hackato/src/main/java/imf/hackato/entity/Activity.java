@@ -1,5 +1,6 @@
 package imf.hackato.entity;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -8,6 +9,7 @@ import java.util.List;
 
 @Data
 @Document
+@Schema(description = "Activity entity")
 public class Activity {
     private String id;
     private String name;
