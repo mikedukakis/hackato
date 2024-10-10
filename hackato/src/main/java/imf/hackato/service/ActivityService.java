@@ -4,8 +4,12 @@ import imf.hackato.entity.Activity;
 import imf.hackato.entity.User;
 import imf.hackato.repository.ActivityRepository;
 import imf.hackato.repository.UserRepository;
+import lombok.Data;
+import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
+@Data
+@Service
 public class ActivityService {
     public final ActivityRepository activityRepository;
     public final UserRepository userRepository;
