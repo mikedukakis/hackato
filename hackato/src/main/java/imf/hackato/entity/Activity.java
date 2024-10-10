@@ -9,6 +9,7 @@ import java.util.List;
 @Data
 @Document
 public class Activity {
+    private String id;
     private String name;
     private List<User> participants;
     private short maxCapacity;
