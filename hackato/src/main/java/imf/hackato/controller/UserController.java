@@ -10,7 +10,7 @@ import reactor.core.publisher.Mono;
 
 @Data
 @RestController
-@RequestMapping("/appActivities/users")
+@RequestMapping("/appActivities/user")
 @Tag(name = "User", description = "Operations related to user management")
 public class UserController {
     private final UserService userService;
