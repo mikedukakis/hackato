@@ -26,16 +26,6 @@ public class ActivityService {
         return activityRepository.save(activity);
     }
 
-    public Mono<Activity> updateActivity(String id, Activity updatedActivity) {
-        return activityRepository.findById(id)
-                .flatMap(activity -> {
-                    activity.setNom(updatedActivity.getNom());
-                    activity.setCapacitat_màxima(updatedActivity.getCapacitat_màxima());
-                    activity.setDescripció(updatedActivity.getDescripció());
-                    return activityRepository.save(activity);
-                });
-    }
-
     public Mono<Activity> findActivityById(String id) {
         return activityRepository.findById(id);
     }
